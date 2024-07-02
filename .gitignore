@@ -3,7 +3,6 @@
 .Rapp.history
 
 # Session Data files
-.RData
 .RDataTmp
 
 # User-specific files
@@ -53,4 +52,9 @@ rsconnect/
 
 #Other folders
 temp/
+
+
+#Stata and csv files
+.dta
+.csv
 
