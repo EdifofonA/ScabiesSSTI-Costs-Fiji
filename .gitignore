@@ -47,3 +47,10 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+
+# MacBook
+.DS_Store
+
+#Other folders
+temp/
+
