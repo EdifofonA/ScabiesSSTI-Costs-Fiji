@@ -1,0 +1,323 @@
+---
+title: Costs of primary healthcare visits and hospitalizations for scabies and bacterial skin infections in Fiji
+
+author:
+  - name: Edifofon Akpan
+    affiliations:
+      - ref: 1
+      - ref: 2
+  - name: Li Jun Thean
+    affiliations:
+      - ref: 3
+      - ref: 4
+  - name: Maria Mow
+    affiliations:
+      - ref: 3
+  - name: Lucia Romani
+    affiliations:
+      - ref: 5
+  - name: Joseph Kado
+    affiliations:
+      - ref: 6
+      - ref: 7
+  - name: John Kaldor
+    affiliations:
+      - ref: 6
+  - name: Andrew Steer
+    affiliations:
+      - ref: 3
+      - ref: 4
+  - name: Natalie Carvalho
+    affiliations:
+      - ref: 1
+    
+affiliations: 
+  - id: 1
+    name: Melbourne School of Population and Global Health, The University of Melbourne, Australia 
+  - id: 2
+    name: Sheffield Centre for Health and Related Research, The University of Sheffield, United Kingdom
+  - id: 3
+    name: Murdoch Children's Research Institute, The Royal Children's Hospital, Australia
+  - id: 4
+    name: Department of Paediatrics, The University of Melbourne, Australia 
+  - id: 5
+    name: Kirby Institute, University of New South Wales, Kensington, Australia.
+  - id: 6
+    name: College of Medicine, Nursing and Health Sciences, Fiji National University, Suva, Fiji.
+  - id: 7
+    name: Wesfarmers Centre for Vaccines and Infectious Diseases, Telethon Kids Institute, Western Australia, Australia.
+  - id: 8
+    name: Ministry of Health and Medical Services, Suva, Fiji
+  
+number-sections: true
+
+filters:
+  - authors-block
+  
+format:
+  docx: 
+    reference-doc: quarto-template.docx
+    link-citations: true
+
+bibliography: references.bib
+---
+
+```{r setup}
+#| output: false
+#| echo: false
+
+library(tidyverse)
+library(gtsummary)
+library(flextable)
+library(officer)
+
+knitr::opts_chunk$set(fig.width = 12, fig.height = 10, fig.align = "center", ft.tabcolsep = 4,
+                      out.width = "100%", collapse = TRUE, fig.pos = "H", out.extra = "")
+
+knitr::knit_hooks$set(inline = function(x) {
+  prettyNum(x, big.mark=",")})
+# 
+# set_flextable_defaults(theme_fun = theme_apa, split = NULL, 
+#                        keep_with_next = NULL, border.width = 0.5)
+
+ftTheme <- function(table){
+  table <- table %>% 
+    width(width = tblwidth) %>%
+    align(i = NULL, j = NULL, align = "right",  part = "all") %>% 
+    align(i = 1,    j = NULL, align = "center", part = "header") %>% 
+    align(i = NULL, j = 1,    align = "left",   part = "all") %>% 
+    fontsize(size = 11, part = "all") %>% 
+    border_inner(border = fp_border(color="black", width = 0.5), part = "body")  %>% 
+    border_outer(border = fp_border(color="black", width = 0.5), part = "body")  %>% 
+    border_inner(border = fp_border(color="black", width = 0.5), part = "header") %>% 
+    border_outer(border = fp_border(color="black", width = 0.5), part = "header")
+  table
+}
+```
+
+**Running head:** Healthcare costs of scabies and skin infections in Fiji.
+
+**Corresponding author:** Edifofon Akpan, [e.akpan\@unimelb.edu.au](malito:e.akpan@unimelb.edu.au)
+
+**Manuscript counts:** XXXX words; 4 tables; 4 figures
+
+**Acknowledgements:** Help with R code
+
+**Funding sources:** The Big SHIFT project was funded by the National Health and Medical Research Council (NHMRC) Australia. The funder had no role in the study design, data collection, data analysis and manuscript preparation.
+
+**Conflicts of interest:** None
+
+**Data availability statement:** The data underlying this article were provided by MCRI by permission. Data will be shared on request to the corresponding author with permission of MCRI.
+
+**Ethics statement:** The study was performed as part of the Big SHIFT trial investigating the effects of ivermectin-based mass drug administration for the control of scabies and SSTIs (trial ID: ACTRN12618000461291). Ethical approval for Big SHIFT was granted by the Fiji National Health Research Ethics Review Committee (reference number: 2018.38.NOR) and the Royal Children's Hospital Human Research Ethics Committee in Melbourne, Australia (reference number: 38020). Written informed consent was obtained from all study participants. Consent of a parent or legal guardian was taken if the participant was less than 18 years of age. The collected information was entered into the study database and each case was assigned a case number to maintain confidentiality.
+
+**Contributor statement:** Put contributions here.
+
+**What is already known about this topic**: *Hidradenitis suppurativa* *(HS)* is a debilitating, complex disease. The current structure of outpatient care for patients with HS is inadequate. Access to HS specialists is limited, and although therapeutic options exist, they do not always fit patients' needs. 70 words
+
+**What does this study add:** The current structure of outpatient care for patients with HS is inadequate. Access to HS specialists is limited, and although therapeutic options exist, they do not always fit patients' needs. 70 words
+
+**Plain language summary:** Scabies is a common skin disease that causes xxx. It affects about xx people in the UK/worldwide). Country or countries in which the researchers are based and where the study took place if different. This study, from the UK, aimed to find out if xxx). How the study was done. We found that...Conclusions and potential for patient benefits and harms. 250 words
+
+{{< pagebreak >}}
+
+## **Abstract** {.unnumbered}
+
+**Background:** Childhood atopic dermatitis can often have a negative impact on quality of life for affected children and their caregivers. The condition contributes to increased healthcare costs and can pose heavy economic burdens on healthcare systems and societies.
+
+**Objectives:** The objective of this study is to provide a comprehensive estimate of the economic burden of childhood atopic dermatitis in Singaporean sample and to investigate associated factors.
+
+**Methods:** This cross-sectional cost-of-illness study applied a societal perspective. Data was collected between December 2016 and December 2017 in Singapore. Caregivers to children below 16 years of age with a physician-confirmed diagnosis of atopic dermatitis were recruited and sociodemographic, clinical characteristics, health service utilization data and time spent on caregiving were collected from all eligible participants.
+
+**Results:** The average annual cost per child with atopic dermatitis was estimated at U.S. dollars (USD) 7943 (mild USD 6651, moderate USD 7935 and severe USD 14 335) in 2017 prices. The major cost was for informal caregiving (46% of the total cost) followed by out-of-pocket expenses (37%). Healthcare utilization contributed to 17% of the total cost of which 43% was for medications.
+
+**Conclusion:** Childhood atopic dermatitis imposes substantial costs with a large proportion arising from informal caregiving and out-of-pocket expenses. The costs related to atopic dermatitis are also strongly related to disease severity. This information is important for policy makers and other health planners when considering how to better support affected families.
+
+{{< pagebreak >}}
+
+# Introduction
+
+Scabies, which is caused by infestation with the mite *Sarcoptes scabiei* var. hominis, is a common predisposing condition to bacterial SSTI in endemic populations.5,6 Secondary bacterial skin infections as a result of scabies (most often in the form of impetigo) occur when breaches of skin caused by scratching allow bacteria, mainly Staphylococcus aureus and group A Streptococcus, to penetrate the epidermis.7--9 They range from relatively benign conditions, such as impetigo, uncomplicated cellulitis, and small abscesses, to more serious diseases, including pyomyositis and necrotizing fasciitis, which can progress to life-threatening systemic infections.3 Skin and soft tissue infections (SSTIs) are a common reason for healthcare presentations in many countries.1--4
+
+The estimated global point prevalence of scabies reported in the 2016 Global Burden of Disease study was approximately 187 million and the annual incident case number was approximately 565 million. Scabies prevalence was 36.4% and impetigo prevalence was 23.4% in the Skin Health Intervention Fiji Trial (SHIFT) project conducted during the period 2012--2013 among the residents of the three islands of Fiji.[@romani2017] In 2017, The World Health Organization (WHO) recently acknowledged scabies as one of the neglected tropical diseases (NTDs) following recommendation from Strategic and Technical Advisory Group for Neglected Tropical Diseases.[@worldhealthorganization2017].
+
+The primary aim of this study is to provide a comprehensive estimate of the economic burden of childhood AD by assessing healthcare costs, costs for informal caregiving and other financial expenses for the family. We also aim to investigate associations between costs and sociodemographic variables as well as the severity of AD.
+
+# Patients and methods
+
+## Study design and setting
+
+The Northern Division, with a population of 131,914 people in 2017, is one of four primary administrative units of Fiji. Healthcare in Fiji comprises a government-run public healthcare system and a private healthcare sector.[@worldhealthorganization2011] Government health facilities provide majority of healthcare services, and these services are free or at very low cost. Public health facilities charge user fees for some services, but these fees are modest and some groups like children under 15 years are exempted from these charges. Private providers are mainly situated in urban areas and their services are used mostly by those who are formally employed.
+
+The Big Skin Health Intervention Fiji Trial (Big SHIFT) was a before-after intervention trial of ivermectin-based mass drug administration delivered to the whole population of the Northern Division of Fiji.[@thean2022] Before drug administration, Big SHIFT established a monthly reporting system at all public healthcare facilities for presentations of scabies and SSTIs over a 50-week period (from July 16, 2018 to June 30, 2019).[@thean2021] Data of scabies patients presenting to the outpatient departments at subdivisional hospitals and other clinics were taken by reviewing monthly reports. Data on scabies in children was also collected from records of the Integrated Management of Childhood Illness (IMCI) clinics through maternal and childcare nurses. The trial also carried out prospective surveillance of SSTI admissions at the divisional hospital in Labasa over a 48-week period (between July 16th 2018 and June 30th 2019).[@thean2020] The cases of scabies and SSTIs were identified by reviewing admission registries and case notes of all newly admitted cases at the hospital. A verbal confirmation was done with the nurse in charge of each ward. The microbiology laboratory records in the hospital were reviewed for skin swabs to identify potential cases for enrolment in our study.
+
+Staff at all primary healthcare facilities reported presentations of scabies and the following SSTIs: infected scabies, impetigo, cellulitis, abscess, and severe SSTIs. We included all scabies and SSTI cases diagnosed in general outpatient departments, emergency departments, IMCI clinics, during school visits, and during community outreaches. Staff collected data regarding treatment, such as the antibiotic prescribed, surgical procedures performed, referral to a larger health facility, and day admission in the health facility. Diagnosis of scabies was made according to the criteria in the International Alliance for the Control of Scabies (IACS) guidelines.[@engelman2020] Hospital admissions for SSTIs were categorised into two groups: those potentially scabies-related (abscess, impetigo, cellulitis, pyomyositis, crusted scabies, infected scabies, necrotising fasciitis with pure growth of Staphylococcus aureus or group A Streptococcus), and those unlikely scabies related (wound infections, surgical wound infections, and necrotising fasciitis without pure growth of Staphylococcus aureus or group A Streptococcus).[@thean2020].
+
+## Costing procedure
+
+We did a cost-of-illness study to estimate the cost of scabies and other SSTIs from a government perspective using baseline data from the Big SHIFT trial. We use a government perspective because most expenses pertain to treatment cost which are included as direct medical costs, with the government in Fiji being the main healthcare payer for direct medical care. Public provision of most outpatient and inpatient care cost is free in Fiji and user fee is insignificant to the government health expenditure.[@worldhealthorganization2011] The costs of all new cases of scabies were estimated with respect to their treatment in two settings; 1) Patients with scabies and SSTI admitted to Labasa Hospital, the main referral hospital in the Northern Division; 2) Patients with scabies who presented to outpatient settings. The main resource use caregories were consultation during clinic visits, hospital bed days (for admissions only), medications, diagnostics, and, surgical procedures. For hospital admitted cases, the cost items included hospital bed-days, intensive care unit (ICU) bed-days, skin swabs, blood cultures, tissue cultures, operations, and medicines. Cost items for outpatient cases included clinic visits, oral antibiotics, intramuscular antibiotics, intravenous antibiotics, permethrin cream and need for admission for treatment of scabies.
+
+The unit cost for each drug was multiplied by the quantity prescribed and added to the costs of any consumables required for its administration, such as syringes for liquid oral medications or needles and syringes for injectable medications.
+
+We measured the frequency healthcare service use for primary healthcare visits and hospitalizations as the number of consultations and bed days, respectively. The hospitalizations dataset included the number of days spent in intensive care unit (ICU), so this number was subtracted from the total bed days to yield bed days in general wards. The data did not include follow-up visits and repeated presentations for the same condition.
+
+To estimate the quantities of medications, we supplemented the utilization data collected in the trial with published treatment guidelines scabies and SSTIs in Fiji.[@ministryofhealth2019] The hospital dataset included the name of medication and number of days prescribed during admission and on discharge, but not the dosage. Therefore, dosages of each medication was estimated from the guidelines. For outpatient cases, we did not have the names of medications prescribed, but only the formulations. Therefore, we used the medications and dosing listed in the treatment guidelines. Thus we assumed patients treated with topical medications were given Permethrin cream. Similarly, we assumed banzathine penicillin Injection and co-trimoxazole for injection and oral medications, respectively. Table S1 in the supplementary material contains calculations of the daily quantities of oral and injection medications in the dataset used in treating scabies and SSTIs.
+
+Each unit of resource utilised by each individual patient was multiplied by unit prices (presented in Table 1 and in Appendix 1) to estimate the cost of each resource utilised by the individual patient. The cost of each resource utilised by an individual patient was added to obtain the average cost of treatment of one case of scabies. The following model developed by Smith and Waycaster[@smith2009] was used to estimate the total direct costs of scabies.
+
+Unit costs of each healthcare resource utilisation were obtained through various sources (shown in Table 1). The unit costs of a hospital bed-day, ICU bed-day and cost of laboratory tests were obtained from a 2012 costing study of selected health facilities in Fiji.[@irava2012] The study reports cost estimates of various healthcare services in in certain hospitals including the Colonial War Memorial Hospital (CWMH). The study participants of our study were admitted in Labasa hospital, the referral centre in Fiji's Northern Division. Since Labasa hospital is comparable to the CWM Hospital, the cost estimate of the CWM Hospital was used in our study. The unit cost for each drug was multiplied by the quantity prescribed and added to the costs of any consumables required for its administration, such as syringes for liquid oral medications or needles and syringes for injectable medications (Table 1).Unit costs of medicines were estimated by referring the third edition of 'Fiji Essential Medicines List' published in 2013.[@ministryofhealth2015; @worldhealthorganisation2011] Given that the patients presenting to outpatient settings were seen in the subdivisional hospitals, Integrated Management of Childhood Illness (IMCI) clinics and primary healthcare clinics, the clinic visit costs were estimated corresponding to the costs of clinic visits in secondary hospitals and health centres (no beds) that are reported in the WHOCHOICE estimate. Since the quantity of medications used by each patient was not available in the dataset, the dose of medicines was estimated following the 4th edition of the 'Fiji Antibiotic Guidelines' published in 2019 by Fiji's Ministry of Health.[@ministryofhealth2019] Cost of operation were not estimated separately because it was captured in the unit cost of hospital bed-days. It was indicated that, while calculating the unit cost of inpatient services, 85% of theatre costs was included to the inpatient cost[@ministryofhealth2019] For the cost of hospital bed-days and OPD visits, there was variation between the Fiji costing study and the WHO-CHOICE estimates. The cost variation was analysed using sensitivity analysis. To calculate routine healthcare costs, we used WHO-Choice estimates for healthcare service costs per bed-day (for hospitalized patients) or per outpatient visit at tertiary level hospitals in Bangladesh which included personnel (healthcare providers and support staff salary), capital, and patients food costs but excluded the cost of drugs and diagnostic tests.[@worldhealthorganisation2011]
+
+## Cost analysis
+
+The total economic burden of scabies was calculated by adding the total cost for hospital admitted cases and outpatient cases. The cost was adjusted for inflation using the gross domestic product implicit price deflator[@turner2019] The cost in Fijian Dollar (FJD) was converted to United States Dollar (USD) using the official exchange rate of 2019 (1 USD = 2.16 FJD).[@worldbank2022] All costs are presented in 2019 USD, unless otherwise stated.Given that scabies is usually an acute disease with a relatively short duration of illness (in weeks), discounting was not applied for economic burden estimation.[@chaiyakunapruk2018].
+
+Demographic characteristics were analysed for age, sex and ethnicity for hospital admitted cases and outpatient cases separately. Ethnicity was classified as iTaukei, Fijian of Indian origin and other ethnicity groups. The age groups were stratified in intervals of 10 years to provide a burden estimate specific to the age group. However, for the first group, age range of 0--4 years was taken because the Integrated Management of Childhood Illness (IMCI) guidelines refer to the management of children under 5 years of age.[@steer2009] Stata/IC version 16.1 (StataCorp, United States) was used for statistical analysis.\
+A one-way sensitivity analysis was conducted to test the robustness of the economic evaluation and to examine how sensitive the estimates are to fluctuations in cost and health resource utilisation. The sensitivity analysis was conducted taking ±20% variation around the cost of medicines, laboratory tests, ICU bed-days and clinic visits. Similarly, 95% Confidence Interval (CI) was used for uncertainty around length of stay. WHO-CHOICE Estimates were used to examine variation in hospital bed-day cost. The results of the sensitivity analysis were reported on a tornado chart. Scenario analysis was done to report the alternative outcomes. A worst scenario was projected taking all the high-cost estimates and a best scenario was projected taking all the low-cost estimates.
+
+<!-- This study reported means ( SD) for continuous variables, and frequencies with corresponding proportions for categorical variables. Skewed variables were presented as median and range (minimum–maximum). Normality of continuous variables was assessed by Kolmogorov–Smirnov and Shapiro–Wilk test. Costs by AD severity (mild, moderate and severe) were compared using the Kruskal–Wallis H-test, and categorical variables were compared using chi-squared or Fisher’s exact test. Spearman’s rank correlation was used to assess the relationship between cost and continuous predictors such as disease duration and age. Relationships between total cost, sociodemographics and severity of AD were analysed by univariable and multivariable generalized linear model (GLM). As the total cost was strictly positive and heavily skewed to the right, we used ‘gamma family with’ and ‘log link function’ to avoid any retransformation bias. The modified Park test was used to select the appropriate family within the GLM approach. Predictors are reported as log coefficients with corresponding standard errors (SEs). The goodness-of-fit was assessed by two different statistics, the deviance and the Pearson v2-statistic. The mean predicted total cost by AD severity was also estimated. In cases of missing or incorrect data (e.g. unrealistic values), the participant was excluded from further analysis for that specific variable. Two-tailed P-values less than 005 was considered statistically significant. -->
+
+All statistical analyses were performed using R version 4.3.1 (R Foundation for Statistical Computing).
+
+# Results
+
+## Patient characteristics
+
+Over a 50-week period between July 2018 and June 2019, a total of 13,736 patients presented to PHC facilities with SSTIs of which, 26.5% (3,643 patients) were diagnosed with scabies (@tbl-table1). Of the patients examined in PHC facilities, 108 required admissions within the health facility. The additional costs due to admission could not be included because we did not have data on whether these were day admissions or overnight stays. In the same 50-week period, there were 788 people admitted with SSTIs, with clinical data available for 748 admissions. Two patients with scabies prior to admission has SSTIs that were classified as unlikely scabies-related, so these were grouped as other SSTIs instead. Overall, 7.0% (52 patients) of all hospital admitted cases had both scabies and SSTIs diagnoses, with the SSTI deemed to be scabies-related.\
+For both PHC presentations and hospital admitted cases, the proportion of male patients were like the Fijian census. However, most patients (86%) belonged to iTaukei ethnicity, as compared to 57% from the census population. People of the age group 0-4 years had the highest presentation (49.32%) as compared to the census population (11%). 53% of patients reside in rural areas compared with 70% in 2017 census. The median length of hospital stay was 7 days for hospitalized patients with scabies-related SSTIs and 5 days for other SSTIs. At the time of patient admission, the median age was 2 for scabies-related patients and 35 for other SSTIs.
+
+## Health service utilization and costs
+
+### Primary health care patients
+
+@tbl-table2 summarizes the resource utilization and costs for scabies and non-scabies presentations to PHCs. Permethrin was prescribed for 2,972 (81.6%) patients presenting with scabies but only 1.4% of other patients. Oral antibiotics were prescribed for 1,508 (41.4%) of scabies patients and 84.3% of patients presenting with SSTIs only. Intramuscular antibiotics were prescribed for 975 (26.8%) scabies patients. Though topical permethrin is the first choice skin cream for scabies in Fiji, a sizeable proportion of patients presenting with scabies also received oral and injection medications. This is likely because it is usual very common to have to treat children with scabies for other SSTIs like cellulitis, or abscess, or impetigo using benzathine penicillin G injection or oral co-trimoxazole (Septrin). The average cost per outpatient case was similar for scabies (\$12.9) and non-scabies presentations (\$12.7). <!--# The total cost of all outpatient cases was $52,846. The total cost for medicines was $31,565 which accounted for 60% of the total outpatient costs. The age group that accounted for most of the costs of medicines was 0-4 years, accounting for 53.51% of the total cost of medicines. Cost of medicines per age group for outpatient cases of scabies is presented in Table 6. The overall direct medical cost of scabies in the Northern Division of Fiji from the government perspective was $96,263 (2019 USD), which is equivalent to $207,929 (2019 FJD). The average cost per patient for each component of treatment is presented in Table 7.  -->
+
+### Hospitalized patients
+
+The mean length of hospital stay for patients with scabies was 10.41 days (95% CI 7.87--12.95) and the median was 7 days. Length of stay referred to the duration of a single episode of hospital admission (calculated by subtracting the day of admission from the day of discharge). The length of stay was associated with the use of intravenous antibiotics. Those with SSTIs who required longer duration of intravenous antibiotics were required to stay longer. The minimum number of days in hospital was 2 days and the maximum was 51 days (SD = 9.64 days). Most of the patients (62.06%) had a length of stay of fewer than 10 days. Very few patients (6.89%) had a length of hospital stay for more than 20 days. The frequency of patients and their hospital bed-days are presented in **Figure 1**. Eleven patients were admitted to the ICU for potentially scabies-related SSTIs. The mean days of their stay in ICU was 3.54 days (95% CI 1.94--5.14) and the median was 2 days. The length of stay in ICU ranged from 1 day to 8 days. From the 58 admissions, five patients required ventilation.
+
+All admitted cases required antibiotics. Fifty-six (95.55%) of these required intravenous antibiotics and two (4.45%) were managed with oral antibiotics. Four (6.89%) patients were managed with single antibiotics while 24 (41.37 %) required three different antibiotics and two (3.44%) required six different antibiotics. Oral antibiotics were prescribed for a mean duration of 7.5 days. Flucloxacillin was the most frequently prescribed oral antibiotic. Similarly, intravenous antibiotics were prescribed for a mean duration of 6.46 days. Cloxacillin was the most frequently prescribed intravenous antibiotic. Twelve (20.69%) patients required surgery. Common surgeries include incision and "drainage", dressing and debridement. Laboratory test was conducted for 53 (91.37%) patients which included skin swab and blood culture. None of these patients underwent tissue culture. The frequency of healthcare resource utilisation by hospital admitted cases and the unit cost of each healthcare resource are presented in **Table 4**. The average cost per hospital admitted case of scabies was \$736 (2019 USD). The total bed day cost for all hospital admissions was \$33,076, and that for ICU bed-days was \$7,393. The total cost for diagnostic tests was \$840 and the total cost for medications was \$2,108. The total direct medical costs of all hospital admitted cases of scabies was \$43,417. Most of the direct medical costs was for the hospital bed-days.
+
+## Factors associated with the costs
+
+## Total annual healthcare costs for Fiji
+
+One-way sensitivity analysis was applied on the total costs taking ±20% variation around the cost of medicines, laboratory tests, ICU stay and clinic visits. A 95% CI was used for sensitivity analysis of length of stay and WHO-CHOICE estimates was used for sensitivity analysis for hospital bed-day. This range allowed sufficient variation in cost figures with respect to the overall values obtained in the base-case analysis, as presented in the tornado plot of Figure 2. While the base value was \$96,263 the total direct medical cost in worst case scenario was \$1,08,514 while that in the best-case scenario was \$75,298. The length of stay was the major determinant in cost for hospital admitted cases as seen in the tornado graph.
+
+# Discussion
+
+Our study presents the patient characteristics, healthcare resource utilisation and the economic burden of scabies and scabies-related SSTIs in the Northern Division of Fiji for both hospital admitted and outpatient cases.
+
+Both men and women are equally susceptible to scabies. Our study found a similar proportion of males and females in both hospital admitted and outpatient scabies cases. This proportion is in line with the results of studies from other tropical and subtropical countries.[@amro2012] Majority of the scabies patients were of iTaukei ethnicity. Consistent with our findings, previous studies in Fiji have documented that scabies is more common in the iTaukei Fijian population.[@haar2014, @steer2009] Social and behavioural factors may explain the higher prevalence of scabies in this population.
+
+For example, the iTaukei population has more children per family and tends to live in houses with a high density of occupants.[@williams2020] In our study, scabies was more common among children of age group 0--4 years. However, a cross-sectional study by[@nair2016] demonstrated that the age group most affected by scabies was 21--40 years The study was conducted in a tertiary hospital with a smaller sample size in a state of India. In our study, 52.70% of the outpatient cases of scabies were in rural areas. This result is comparable to that of Nair et al., who found 60.78% of patients from rural areas.[@nair2016] A possible explanation for the higher frequency of scabies cases in rural areas is that shortage of water is associated with poor personal hygiene and poor hygiene leads to an increased risk of transmission of scabies.[@scheinfeld2004].
+
+Scabies is usually cured if treatment is taken properly. Permethrin is the recommended medicine prescribed for treatment of uncomplicated scabies. However, severe scabies, crusted scabies, scabies with secondary bacterial infections and other complications warrant admission to hospital. In our study period, 58 cases admitted to hospital for SSTIs had scabies. In an Australian study where most of the patients were from the Indigenous population and from economically disadvantaged remote communities, 237 patients were admitted with a diagnosis of scabies between 2006 and 2016 at the Royal Darwin Hospital.[@lynar2017] We observed that patients in our study required a mean length of stay of 10.41days. In the Australian study by[@whitehall2013] the mean duration of hospital stay for children with scabies was 4.5 days. One possible explanation for the longer duration of hospital stay in our study is the associated SSTIs, supported by the findings that all hospital admitted cases required antibiotics. In addition, resource use may differ substantially between countries such as Fiji and Australia depending on the healthcare policy, funding, access to healthcare services and cultural practices.
+
+The high economic burden of neglected tropical diseases has been documented in various studies. Prior reviews have consistently documented the burden of scabies in children, and only a limited number of studies have described the burden in the elderly. Our study extends previous cost-estimate studies by providing an estimation of the cost and healthcare resource utilisation associated with scabies cases for all age groups. Our study found that the average cost per patient with scabies for hospital admitted cases was \$736. In an Australian study, the estimated annual cost for treatment of one case of paediatric scabies and pyoderma in a hospitalised setting was \$10,499 (2019 USD).[@thomas2016] There are three possible explanations for this huge gap: 1) the Australian study included cases of pyoderma, which increased the cost estimates; 2) the Australian study included direct non-healthcare costs such as the cost of transport; 3) healthcare services in Australia are expensive compared with Fiji,as reflected by the WHO-CHOICE Estimates demonstrating that the cost of a hospital bed-day in Australia is almost ten times higher than in Fiji.
+
+In our study, the average cost of treatment of a case of scabies in an outpatient setting was \$14.51. In contrast, the average cost of treating a case of scabies in outpatient care in the United States was \$216 (2019 USD).[@owusu-edusei2009] where the cost estimate was based on claims for a privately insured population. We derived direct costs using a bottom-up approach, applying a government perspective, whereas the United States study applied the third-party-payer perspective to estimate the cost. Our study also revealed that the cost of treating scabies is mainly driven by use of medicines, which is supported by the finding that antibiotics were prescribed for all cases of hospital admitted cases that presented with secondary bacterial infections, complications, and scabies related SSTIs. It is plausible that delayed detection and normalisation of skin infections contribute to complications of scabies in endemic countries. In endemic countries, patients may not seek treatment of scabies unless it creates a significant disturbance to their quality of life.[@worth2012].
+
+As per the National Health Accounts from the Ministry of Health of Fiji, the average per capita health spending was \$375.60 (FJD) (180 USD) in 2015.[@ministryofhealth2017] An average per capita spending for outpatient cases was \$51 where 41.90% of curative expenditure was for inpatient cases and 58.1% of curative expenditure was for outpatient cases.[@ministryofhealth2017] When the transport cost and indirect costs were excluded, the average cost of one episode of scabies in our study was \$736 (2019 USD) for hospital admitted cases and \$14.51 (2019 USD) for outpatient cases. This data reflects that accounting for the total annual per capita inpatient cost, the cost for hospital admission for scabies and its complications is relatively higher.
+
+We compared the cost of treatment of scabies with the cost of treatment of pneumonia in the similar setting in Fiji. Pneumonia also has a high health burden in Fiji (annual incidence 26.5 per 1,00,000 population).[@russell2010] The cost of medicines is higher for scabies. While the cost of medicines for outpatient scabies in our study was \$8.66 (2019 USD) the cost of medicines for treatment of outpatient pneumonia ranged from \$0.20 (2019 USD) to \$7.46 (2019 USD).[@temple2012] The average cost per episode of outpatient pneumonia in their study was \$18.98 including the societal cost. This cost is comparable to the cost of outpatient scabies from our study where we have not included the societal cost. Our direct cost estimate not only addresses the cost of scabies to the Fijian government but also highlights the major contributing factor of the direct cost of scabies. This study demonstrates that the cost of medicine, hospital bed-day and length of stay creates the major financial burden for scabies in Fiji. Moreover, this study also demonstrates that strategies for early detection and treatment of scabies and related SSTIs in the age group 0-4 years could reduce the economic burden to the government because children of this age group are the major contributors for increased healthcare utilisation and healthcare costs. The cost of hospital bed days, operations, ICU stays, medicines and laboratory tests vary between countries and between levels of healthcare services. Our sensitivity analysis revealed that a high level of sensitivity was associated with cost of medicines and length of stay while the cost of laboratory analyses had minimal sensitivity around the baseline cost.
+
+A strength of this study is that it analyses the data obtained from a trial that was conducted among the entire population of the Northern Division of Fiji, including the children and the elderly. In addition, we used the micro costing method to identify cost items and a bottom-up approach to value the cost, which are more accurate in cost estimation.
+
+However, there were several limitations to our study. The approach used for calculating direct costs might understate the true economic burden given that the dataset lacked cases of scabies that were not recognised by clinicians or the cases that were recognised and treated but not included in patient records. Additionally, many people choose traditional medical remedies for scabies in Fiji.[@mitchell2020] It is also possible that because scabies is generally normalised by clinicians in endemic settings, the reliance on hospitals and clinics for diagnosis and treatment may lead to under-reporting of cases. Furthermore, indirect costs, cost of management of recurrent cases and cost of institutional outbreaks were not analysed in this study. Alternative approaches such as a societal perspective would be more informative; however, we choose to employ the government perspective because the data was not collected during the study on indirect costs and non-medical costs including the cost of transport. The selection criteria applied in this study included cases of SSTIs related to scabies. The risk with this selection criteria on cost estimation is that the estimated total cost of scabies may overlap with the economic burden of other diseases because a single patient may present with multiple illnesses. There were missing data in outpatient cases, but the number was insignificant in consideration of our large sample size. The doses of medicine were not reported in the dataset; thus, we estimated the dose based on 'Fiji Antibiotic Guidelines'. It is likely that depending on clinicians, the doses of medicine would vary between clinical practice and recommendations from the guidelines. Thus, the estimated doses may not exactly correspond to the actual dose of medicines prescribed to the patients in this study.
+
+We report the economic burden of scabies in the Northern Division of Fiji. Our study highlights that scabies imposes a substantial economic loss to the government in relation to costs and healthcare resource utilisation. The true cost of scabies is likely to be much higher than what was calculated in this study because under-recognition of scabies is a common problem in highly endemic and resource-limited countries such as Fiji. It is likely that there is a similar burden of scabies in other tropical and subtropical countries. There are many factors that contribute to the high burden, but our findings confirm the need for advocacy to develop effective strategies to reduce the cases of scabies in endemic countries. Increased spending on scabies prevention and control might reduce the direct and indirect cost of treating scabies. The share of direct medical costs may vary widely across countries and health policy settings, but these data may support future investment in cost-effective strategies to control scabies. Our study contributes to the literature about the direct medical costs of scabies in a setting of high disease prevalence in Fiji. Our findings may be relevant to the Pacific, where the burden of scabies and the costs of treatment are likely to be like that of Fiji. Moreover, our findings can be used in the next step for this project, which is to evaluate the cost effectiveness of mass drug administration for scabies in Fiji. Further research is needed to explicitly model the net economic burden of scabies.
+
+{{< pagebreak >}}
+
+# References {#sec-references .unnumbered}
+
+::: {#refs}
+:::
+
+{{< pagebreak >}}
+
+# Tables {#sec-tables .unnumbered}
+
+
+```{r}
+#| echo: false
+#| message: false
+#| label: tbl-table1
+#| tbl-cap: Characteristics of primary health care and hospitalized patients with skin and soft tissue infections between July 2018 and June 2019 in Northern Division, Fiji.
+autonum <- run_autonum(seq_id = "tab", bkm = "tbl-table1")
+table1   <- readRDS(file = "output/table1.rds")
+tblwidth <- c(1.75, 1.00, 1.00, 1.00, 1.00)
+table1   <- add_footer_lines(table1, value = as_paragraph(c("Percentages may not total 100 due to rounding. IQR, interquartile range; NA, not applicable", " ")))
+table1   <- set_caption(table1, caption = "Characteristics of primary health care and hospitalized patients with skin and soft tissue infections between July 2018 and June 2019 in Northern Division, Fiji.", style = "Table Caption", autonum = autonum)
+ftTheme(table1)
+
+# tfr2003 <- set_caption(tfr2003, caption = "Estimated indices of proximate determinants of fertility 2003", style = "Table Caption", autonum = run_autonum(seq_id = "tab", bkm = "tfr2003"))
+
+```
+
+{{< pagebreak >}}
+
+```{r}
+#| echo: false
+#| message: false
+#| label: tbl-table2
+#| tbl-cap: Mean costs per patient (in 2020 Fiji dollars) by resource use category of scabies- and non-scabies-related SSTIs in Northern Division, Fiji.
+
+table2   <- readRDS(file = "output/table2.rds")
+tblwidth <- c(1.75, 1.00, 1.00, 1.00, 1.00)
+ftTheme(table2)
+```
+
+{{< pagebreak >}}
+
+```{r}
+#| echo: false
+#| message: false
+#| label: tbl-table3
+#| tbl-cap: Estimated total annual number of cases, hospitalizations, and costs (in 2020 Fiji dollars) of scabies- and non-scabies-related SSTIs, extrapolated to all four divisions in Fiji based on 2017 census figures.
+
+table3   <- readRDS(file = "output/table3.rds")
+tblwidth <- c(2.75, 1.00, 1.00, 1.00)
+ftTheme(table3)
+```
+
+{{< pagebreak >}}
+
+# Supplementary Tables {.unnumbered}
+
+```{r}
+#| echo: false
+#| message: false
+#| label: tbl-sTable2
+#| tbl-cap: Healthcare resource utilization and costs (in 2020 Fiji dollars) of primary healthcare visits for scabies- and non-scabies-related SSTIs in Northern Division, Fiji.
+
+sTable2   <- readRDS(file = "output/sTable2.rds")
+tblwidth <- c(1.75, 1.00, 1.00, 1.00, 1.00)
+ftTheme(sTable2)
+```
+
+{{< pagebreak >}}
+
+```{r}
+#| echo: false
+#| message: false
+#| label: tbl-sTable3
+#| tbl-cap: Healthcare resource utilization and mean costs (in 2020 Fiji dollars) of hospital admissions with scabies- and non-scabies-related SSTIs in Northern Division, Fiji.
+
+sTable3   <- readRDS(file = "output/sTable3.rds")
+tblwidth <- c(1.75, 1.00, 1.00, 1.00, 1.00)
+ftTheme(sTable3)
+```
+
+{{< pagebreak >}}
+
+```{r}
+#| echo: false
+#| message: false
+#| label: tbl-sTable4
+#| tbl-cap: Total costs (in 2020 Fiji dollars) by patient characteristics of scabies- and non-scabies-related SSTIs in Northern Division, Fiji.
+
+sTable4   <- readRDS(file = "output/sTable4.rds")
+tblwidth <- c(1.75, 1.00, 1.00, 1.00, 1.00)
+ftTheme(sTable4)
+```

@@ -1,0 +1,130 @@
+Variable / Field Name,Field Type,Field Label,"Choices, Calculations, OR Slider Labels",Field Note,Text Validation Type OR Show Slider Number,Text Validation Min,Text Validation Max,Identifier?,Branching Logic (Show field only if...)
+record_id,text,Record ID,,,,,,,
+study_id,text,Study ID,,,integer,,,,
+dob,text,Date of birth,,,date_dmy,,,y,
+sex,radio,Sex,"1, male | 2, female",,,,,,
+enroldate,text,Date of enrolment,,,date_dmy,1/05/2018,12/12/2020,,
+enrolage_yrs,calc,Age at enrolment,"datediff([dob], [enroldate], ""d"", ""dmy"", true)/ 365.25",,,,,y,
+admisdate,text,Date of admission,,,date_dmy,1/03/2018,12/12/2020,,
+dischadate,text,Date of discharge,,,date_dmy,1/03/2018,12/12/2020,,
+los,calc,Length of stay,"datediff([admisdate], [dischadate], ""d"", ""dmy"", true)",,,,,y,
+ethnicity,radio,Ethnicity,"1, iTaukei | 2, Fijian of Indian decent | 3, Fijian of Chinese decent | 4, Other",,,,,y,
+ethnispeci,text,Specify ethnicity,,,,,,y,[ethnicity] = '4'
+ref_from,yesno,Referred from elsewhere?,,,,,,,
+ref_from_where,text,Where were they referred from?,,,,,,,[ref_from] = '1'
+ref_to,yesno,Transferred elsewhere?,,,,,,,
+ref_to_where,text,Where were they transferred to?,,,,,,,[ref_to] = '1'
+adm_outcome,radio,Outcome of admission,"1, discharged | 2, transferred | 3, disability | 4, death",choose disability only if it was acquired during current admission,,,,,
+adm_outcome_dis,text,Specify disability ,,,,,,,[adm_outcome] = '3'
+ward,dropdown,Ward where the patient was found,"1, paediatrics | 2, men's surgical | 3, women's  surgical | 4, men's medical | 5, women's medical | 6, maternity ward | 7, ICU",,,,,,
+refersource,dropdown,How case was found,"1, ward nurse | 2, ward doctor | 3, lab technician | 4, rounding book | 5, admission book | 6, other",,,,,,
+sourcespeci,text,Specify how case was found,,,,,,,[refersource] = '6'
+diagnosis,checkbox,Case type,"1, Invasive GAS/ streptococcus pyogenes | 2, Invasive SA | 3, ARF | 4, RHD | 5, PSGN | 6, Skin and Soft Tissue Infection | 7, Bone and joint infection | 8, Invasive group C or G streptococcus",condition for which the patient has been admitted,,,,,
+scabies,radio,Scabies,"1, yes | 0, no | 9999, don't know",,,,,,[diagnosis(1)] = '1' or [diagnosis(2)] = '1' or [diagnosis(3)] = '1' or [diagnosis(4)] = '1' or [diagnosis(5)] = '1' or [diagnosis(6)] = '1' or [diagnosis(7)] = '1' or [diagnosis(8)] = '1'
+impetigoyn,yesno,Impetigo,,,,,,,[diagnosis(1)] = '1' or [diagnosis(2)] = '1' or [diagnosis(3)] = '1' or [diagnosis(4)] = '1' or [diagnosis(5)] = '1' or [diagnosis(6)] = '1' or [diagnosis(7)] = '1' or [diagnosis(8)] = '1'
+bacteraemia,radio,Bacteraemia,"1, yes | 0, no | 9999, don't know",,,,,,[diagnosis(1)] = '1' or [diagnosis(2)] = '1' or [diagnosis(8)] = '1'
+urti,radio,URTI,"1, yes | 0, no | 9999, don't know",upper respiratory tract infection,,,,,[diagnosis(1)] = '1' or [diagnosis(2)] = '1' or [diagnosis(8)] = '1'
+pneumonia,radio,pneumonia,"1, yes | 0, no | 9999, don't know",,,,,,[diagnosis(1)] = '1' or [diagnosis(2)] = '1' or [diagnosis(8)] = '1'
+ie,radio,Infective endocarditis,"1, yes | 0, no | 9999, don't know",,,,,,[diagnosis(2)] = '1' or [diagnosis(1)] = '1' or [diagnosis(8)] = '1'
+empyema,radio,Empyema,"1, yes | 0, no | 9999, don't know",,,,,,[diagnosis(1)] = '1' or [diagnosis(2)] = '1' or [diagnosis(8)] = '1'
+peritonitis,radio,Peritonitis,"1, yes | 0, no | 9999, don't know",,,,,,[diagnosis(1)] = '1' or [diagnosis(2)] = '1' or [diagnosis(8)] = '1'
+ssti,radio,Skin and soft tissue infection (invasive infections),"1, yes | 0, no | 9999, don't know",,,,,,[diagnosis(2)] = '1' or [diagnosis(1)] = '1' or [diagnosis(8)] = '1'
+sstitype,checkbox,Type of SSTI (invasive infections),"1, cellulitis | 2, abscess",,,,,,[ssti] = '1'
+necfas,radio,Necrotising fasciitis,"1, yes | 0, no | 9999, don't know",,,,,,[diagnosis(1)] = '1' or [diagnosis(2)] = '1' or [diagnosis(8)] = '1'
+arthritis,radio,Septic arthritis/bursitis,"1, yes | 0, no | 9999, don't know",,,,,,[diagnosis(1)] = '1' or [diagnosis(2)] = '1' or [diagnosis(8)] = '1'
+osteo,radio,Osteomyelitis,"1, yes | 0, no | 9999, don't know",,,,,,[diagnosis(1)] = '1' or [diagnosis(2)] = '1' or [diagnosis(8)] = '1'
+gynae,radio,Gynaecological,"1, yes | 0, no | 9999, don't know",,,,,,[diagnosis(1)] = '1' or [diagnosis(2)] = '1' or [diagnosis(8)] = '1'
+surginf,radio,Surgical site infecion,"1, yes | 0, no | 9999, don't know",,,,,,[diagnosis(1)] = '1' or [diagnosis(2)] = '1' or [diagnosis(8)] = '1'
+othersource,text,Other source,,,,,,,[diagnosis(1)] = '1' or [diagnosis(2)] = '1' or [diagnosis(8)] = '1'
+bc,radio,Blood culture,"1, positive | 0, negative | 9999, not collected",,,,,,[diagnosis(1)] = '1' or [diagnosis(2)] = '1' or [diagnosis(6)] = '1' or [diagnosis(7)] = '1' or [diagnosis(8)] = '1'
+bcr,checkbox,Blood culture result,"sa, Staphylococcus aureus | nmrsa, nMRSA | mrsa, MRSA | gas, group A streptococcus/ streptococcus pyogenes | gcs, group C streptococcus | ggs, group G streptococcus | oth, other",name of organism,,,,,[bc] = '1'
+spec_bc,text,Specify 'other' positive blood culture result,,,,,,,[bcr(oth)] = '1'
+tissc,radio,Tissue,"1, positive | 0, negative | 9999, not collected",,,,,,[diagnosis(1)] = '1' or [diagnosis(2)] = '1' or [diagnosis(8)] = '1'
+tissresult_invasive,checkbox,Tissue culture results,"sa, Staphylococcus aureus (MSSA) | nmrsa, nMRSA | mrsa, MRSA | gas, group A streptococcus/ streptococcus pyogenes | gcs, group C streptococcus | ggs, group G streptococcus | oth, other",,,,,,[tissc] = '1'
+tis_other,text,Specify 'other' positive tissue culture result,,,,,,,[tissresult_invasive(oth)] = '1'
+tissuesite,text,Tissue culture site,,,,,,,[tissc] = '1'
+csf,radio,CSF,"1, positive | 0, negative | 9999, not collected",cerebrospinal fluid,,,,,[diagnosis(1)] = '1' or [diagnosis(2)] = '1' or [diagnosis(8)] = '1'
+csfresult,checkbox,CSF result,"sa, Staphylococcus aureus | nmrsa, nMRSA | mrsa, MRSA | gas, group A streptococcus/ streptococcus pyogenes | gcs, group C streptococcus | ggs, group G streptococcus | oth, other",,,,,,[csf] = '1'
+csf_oth,text,Specify 'other' positive CSF culture result,,,,,,,[csfresult(oth)] = '1'
+deepwound,radio,Deep wound,"1, positive | 0, negative | 9999, not collected",,,,,,[diagnosis(2)] = '1' or [diagnosis(1)] = '1' or [diagnosis(8)] = '1'
+dwresult,checkbox,Deep wound result,"sa, Staphylococcus aureus | nmrsa, nMRSA | mrsa, MRSA | gas, group A streptococcus/ streptococcus pyogenes | gcs, group C streptococcus | ggs, group G streptococcus | oth, other",,,,,,[deepwound] = '1'
+dw_oth,text,Specify 'other' positive deep wound result,,,,,,,[dwresult(oth)] = '1'
+dwsite,text,Deep wound site,,,,,,,[deepwound] = '1'
+empyculture,radio,Empyema culture,"1, positive | 0, negative | 9999, not collected",,,,,,[diagnosis(1)] = '1' or [diagnosis(2)] = '1' or [diagnosis(8)] = '1'
+empyresults,checkbox,Empyema results,"sa, Staphylococcus aureus | nmrsa, nMRSA | mrsa, MRSA | gas, group A streptococcus/ streptococcus pyogenes | gcs, group C streptococcus | ggs, group G streptococcus | oth, other",,,,,,[empyculture] = '1'
+empy_oth,text,Specify 'other' positive empyema result,,,,,,,[empyresults(oth)] = '1'
+jointasp,radio,Joint aspirate,"1, positive | 0, negative | 9999, not collected",,,,,,[diagnosis(1)] = '1' or [diagnosis(2)] = '1' or [diagnosis(8)] = '1'
+jointresult,checkbox,Joint aspirate result,"sa, Staphylococcus aureus | nmrsa, nMRSA | mrsa, MRSA | gas, group A streptococcus/ streptococcus pyogenes | gcs, group C streptococcus | ggs, group G streptococcus | oth, other",,,,,,[jointasp] = '1'
+ja_oth,text,Specify 'other' positive joint aspirate result,,,,,,,[jointresult(oth)] = '1'
+jasite,text,Joint aspirate site,,"specify right/left joing eg. knee, ankle...",,,,,[jointasp] = '1'
+fluidoth,radio,Fluid other,"1, positive | 0, negative | 9999, not collected",,,,,,[diagnosis(1)] = '1' or [diagnosis(2)] = '1' or [diagnosis(8)] = '1'
+fluidsite,text,Fluid other site,,"specify where fluid was collected from  eg, abdominal cavity",,,,,[fluidoth] = '1'
+fluidothresult,checkbox,Fluid other result,"sa, Staphylococcus aureus | nmrsa, nMRSA | mrsa, MRSA | gas, group A streptococcus/ streptococcus pyogenes | gcs, group C streptococcus | ggs, group G streptococcus",,,,,,[fluidoth] = '1'
+emmtype,yesno,Specimen collected for emm typing?,,please obtain consent,,,,,[bcr(gas)] = '1' or [bcr(gcs)] = '1' or [bcr(ggs)] = '1' or [tissresult_invasive(gas)] = '1' or [tissresult_invasive(gcs)] = '1' or [tissresult_invasive(ggs)] = '1' or [csfresult(gas)] = '1' or [csfresult(gcs)] = '1' or [csfresult(ggs)] = '1' or [empyresults(gas)] = '1' or [empyresults(gcs)] = '1' or [empyresults(ggs)] = '1' or [jointresult(gas)] = '1' or [jointresult(gcs)] = '1' or [jointresult(ggs)] = '1' or [fluidothresult(gas)] = '1' or [fluidothresult(gcs)] = '1' or [fluidothresult(ggs)] = '1' or [skinswab_result(gas)] = '1' or [skinswab_result(gcs)] = '1' or [skinswab_result(ggs)] = '1' or [tissueculture_results(gas)] = '1' or [tissueculture_results(gcs)] = '1' or [tissueculture_results(ggs)] = '1' or [jointresult_sa(gas)] = '1' or [jointresult_sa(gcs)] = '1' or [jointresult_sa(ggs)] = '1' or [tissresult_om(gas)] = '1' or [tissresult_om(gcs)] = '1' or [tissresult_om(ggs)] = '1'
+spec_label_no,text,Label number for specimen,,,,,,y,[emmtype] = '1'
+stss,radio,Streptococcal toxic shock syndrome,"1, yes | 0, no | 9999, don't know",Please refer to criteria,,,,,[diagnosis(1)] = '1' or [diagnosis(6)] = '1' or [diagnosis(7)] = '1'
+amputation,radio,Amputation,"1, yes | 0, no | 9999, don't know",,,,,,[diagnosis(1)] = '1' or [diagnosis(2)] = '1' or [diagnosis(7)] = '1' or [diagnosis(6)] = '1' or [diagnosis(8)] = '1'
+icuadmit,radio,ICU admission,"1, yes | 0, no | 9999, don't know",,,,,,[diagnosis(1)] = '1' or [diagnosis(2)] = '1' or [diagnosis(6)] = '1' or [diagnosis(7)] = '1' or [diagnosis(8)] = '1'
+icudays,text,Number of days in ICU,,,,,,,[icuadmit] = '1'
+surgery,radio,Surgery,"1, yes | 0, no | 9999, don't know",,,,,,[diagnosis(1)] = '1' or [diagnosis(2)] = '1' or [diagnosis(6)] = '1' or [diagnosis(7)] = '1' or [diagnosis(8)] = '1'
+spec_surg,text,Specify surgery,,specify type and number of surgeries during admission,,,,,[surgery] = '1'
+ventilation,radio,Ventilation,"1, yes | 0, no | 9999, don't know",,,,,,[diagnosis(1)] = '1' or [diagnosis(2)] = '1' or [diagnosis(6)] = '1' or [diagnosis(7)] = '1' or [diagnosis(8)] = '1'
+vent_days,text,Ventilated for how many days?,,,integer,1,999,,[ventilation] = '1'
+ivab,radio,IV antibiotics?,"1, yes | 0, no | 9999, don't know",,,,,,[diagnosis(1)] = '1' or [diagnosis(2)] = '1' or [diagnosis(6)] = '1' or [diagnosis(7)] = '1' or [diagnosis(8)] = '1'
+antibiotype,text,Antibiotic type,,,,,,,[ivab] = '1'
+ivab_check,checkbox,Name of IV antibiotic as inpatient,"clox, Cloxacillin | gent, Gentamicin | pen, Penicillin | met, Metronidazole | ery, Erythromycin | cef, Ceftriaxone | cip, Ciprofloxacin | mer, Meropenem | sep, Septrim | oth, Other",,,,,,[ivab] = '1'
+ivabduration,text,IV antibiotic duration (days),,,integer,1,999,,[ivab]='1'
+oralab,radio,Oral antibiotics?,"1, yes | 0, no | 9999, don't know",,,,,,[diagnosis(1)] = '1' or [diagnosis(2)] = '1' or [diagnosis(6)] = '1' or [diagnosis(7)] = '1' or [diagnosis(8)] = '1'
+antibiotype_oral,text,Antibiotic type oral,,,,,,,[oralab] = '1'
+oralab_checkad,checkbox,Type of oral antibiotic during admission,"flu, Flucloxacillin | pen, Penicillin | amo, Amoxycillin | met, Metronidazole | ery, Erythromycin | dox, Doxyclycline | cep, Cephalexin | sep, Septrim | oth, Other",,,,,,[oralab] = '1'
+oralabduration,text,Oral antibiotics duration (days),,,integer,1,999,,[oralab]='1'
+oralab_dc,yesno,Discharged on oral antibiotics?,,,,,,,[diagnosis(1)] = '1' or [diagnosis(2)] = '1' or [diagnosis(6)] = '1' or [diagnosis(7)] = '1' or [diagnosis(8)] = '1'
+oralab_typdc,checkbox,Type of oral antibiotic at discharge,"flu, Flucloxacillin | pen, Penicillin | amo, Amoxycillin | met, Metronidazole | ery, Erythromycin | dox, Doxyclycline | cep, Cephalexin | sep, Septrim | oth, Other",,,,,,[oralab_dc] = '1'
+oralabdc_days,text,Duration of oral antibiotic course at discharge (days),,,,,,,[oralab_dc] = '1'
+invasive_outcome,radio,Outcome for invasive infections,"1, Recovered fully | 2, Disability | 3, Death",,,,,,[diagnosis(1)] = '1' or [diagnosis(2)] = '1' or [diagnosis(8)] = '1'
+dis_spec,text,Disability specified,,,,,,,[invasive_outcome] = '2'
+immusup,radio,Immunosuppressed,"1, yes | 0, no | 9999, don't know",,,,,,[diagnosis(1)] = '1' or [diagnosis(2)] = '1' or [diagnosis(8)] = '1' or [diagnosis(7)] = '1'
+diabetes,radio,Diabetes,"1, yes | 0, no | 9999, don't know",,,,,,[diagnosis(1)] = '1' or [diagnosis(2)] = '1' or [diagnosis(8)] = '1' or [diagnosis(7)] = '1'
+carddis,radio,Cardiac disease,"1, yes | 0, no | 9999, don't know",,,,,,[diagnosis(1)] = '1' or [diagnosis(2)] = '1' or [diagnosis(8)] = '1' or [diagnosis(7)] = '1'
+renaldis,radio,Renal disease,"1, yes | 0, no | 9999, don't know",,,,,,[diagnosis(1)] = '1' or [diagnosis(2)] = '1' or [diagnosis(8)] = '1' or [diagnosis(7)] = '1'
+malig,radio,Malignancy,"1, yes | 0, no | 9999, don't know",,,,,,[diagnosis(1)] = '1' or [diagnosis(2)] = '1' or [diagnosis(8)] = '1' or [diagnosis(7)] = '1'
+liverdis,radio,Liver Disease,"1, yes | 0, no | 9999, don't know",,,,,,[diagnosis(1)] = '1' or [diagnosis(2)] = '1' or [diagnosis(8)] = '1' or [diagnosis(7)] = '1'
+chickenpox,radio,Chikenpox,"1, yes | 0, no | 9999, don't know",,,,,,[diagnosis(1)] = '1' or [diagnosis(2)] = '1' or [diagnosis(8)] = '1' or [diagnosis(7)] = '1'
+type_ssti,checkbox,Type of skin and soft tissue infection,"cel, Cellulitis | abs, Abscess | nf, Necrotising fasciitis | wi, Wound infection | swi, Surgical wound infection | si, Severe impetigo | if, Infected scabies | cs, Crusted scabies | la, Lymphadenitis | my, Pyomyositis",,,,,,[diagnosis(6)] = '1'
+site_ssti,checkbox,Site of skin and soft tissue infection,"face, face or scalp | neck, neck | chest, chest | abd, abdomen | back, back | butt, buttocks | gro, groin | ul, upper limb | ll, lower limb",,,,,,[diagnosis(6)] = '1'
+skin_swabyn,yesno,Skin swab taken?,,,,,,,[diagnosis(6)] = '1'
+skinswab_result,checkbox,Result of skin swab for SSTI,"sa, Staphylococcus aureus (MSSA) | nmrsa, nMRSA | mrsa, MRSA | gas, group A streptococcus/ streptococcus pyogenes | gcs, group C streptococcus | ggs, group G streptococcus | 7, Other | 0, No growth",,,,,,[skin_swabyn] = '1'
+spec_skin_other,text,Specify other organism from skin swab,,,,,,,[skinswab_result(7)] = '1'
+tissueculture_yn,yesno,Tissue culture taken? (operative sample),,,,,,,[diagnosis(6)] = '1'
+tissueculture_results,checkbox,Results of tissue culture (operative sample),"sa, Staphylococcus aureus (MSSA) | nmrsa, nMRSA | mrsa, MRSA | gas, group A streptococcus/ streptococcus pyogenes | gcs, group C streptococcus | ggs, group G streptococcus | 7, Other | 0, No growth",,,,,,[tissueculture_yn] = '1'
+tiss_oth_ssti,text,Specify 'other' positive tissue culture result,,,,,,,[tissueculture_results(7)] = '1'
+bonejointinf_type,radio,Type of bone and joint infection,"1, Septic arthritis | 2, Osteomyelitis | 3, Both",,,,,,[diagnosis(7)] = '1'
+sa_site,checkbox,Site of septic arthritis,"elb, elbow | sh, shoulder | hip, hip | knee, knee | ank, ankle | hand, hand | foot, foot | spi, spine",,,,,,[bonejointinf_type] = '1' or [bonejointinf_type] = '3'
+om_site,checkbox,Site of osteomyelitis,"face, facial | spi, spine | ul, upper limb | ll, lower limb | pel, pelvis | tru, trunk",,,,,,[bonejointinf_type] = '2' or [bonejointinf_type] = '3'
+jointasp_sa,radio,Joint aspirate,"1, positive | 0, negative | 9999, not collected",,,,,,[bonejointinf_type] = '1' or [bonejointinf_type] = '3'
+jointresult_sa,checkbox,Joint aspirate result,"sa, Staphylococcus aureus | nmrsa, nMRSA | mrsa, MRSA | gas, group A streptococcus/ streptococcus pyogenes | gcs, group C streptococcus | ggs, group G streptococcus | oth, other",,,,,,[jointasp_sa] = '1'
+jointresult_sa_oth,text,Specify 'other' positive joint aspirate result,,,,,,,[jointresult_sa(oth)] = '1'
+jasite_sa,text,Joint aspirate site,,"specify right/left joing eg. knee, ankle...",,,,,[jointasp_sa] = '1'
+tissc_om,radio,Tissue,"1, positive | 0, negative | 9999, not collected",,,,,,[bonejointinf_type] = '2' or [bonejointinf_type] = '3' 
+tissresult_om,checkbox,Tissue culture results,"sa, Staphylococcus aureus (MSSA) | nmrsa, nMRSA | mrsa, MRSA | gas, group A streptococcus/ streptococcus pyogenes | gcs, group C streptococcus | ggs, group G streptococcus | oth, other",,,,,,[tissc_om] = '1'
+tissresult_om_oth,text,Specify 'other' positive tissue culture result,,,,,,,[tissresult_om(oth)] = '1'
+tissuesite_om,text,Tissue culture site,,,,,,,[tissc_om] = '1'
+date_collected,text,Date specimen collected,,,date_dmy,,,,
+specimen_division,checkbox,Division where specimen was collected,"m, Macuata | c, Cakaudrove | t, Taveuni | b, Bua",,,,,,
+spec_fac_ma,checkbox,Facility where specimen was collected (Macuata),"1, Labasa Hospital | 2, Labasa Health Centre | 3, Nasea Health Centre | 4, Wainikoro Health Centre | 5, Lagi | 6, Naduri | 7, Dreketi | 8, Seaqaqa | 9, Cikobia | 10, Visoqo | 11, Coqeloa | 12, Vunivutu | 13, Udu | 14, Dogotuki | 15, Kia | 16, Naqumu",,,,,,[specimen_division(m)] = '1'
+spec_fac_ca,dropdown,Facility where specimen was collected (Cakaudrove),"1, Savusavu hospital | 2, Savusavu health centre | 3, Natewa | 4, Tukavesi | 5, Saqani | 6, Rabi | 7, Korotasere | 8, Nakorovatu | 9, Naweni | 10, Bagasau | 11, Kioa | 12, Tawake | 13, Navakaka | 14, Nabalebale",,,,,,[specimen_division(c)] = '1'
+spec_fac_ta,dropdown,Facility where specimen was collected (Taveuni),"1, Taveuni hospital | 2, Waiyevo | 3, Vuna health centre | 4, Vuna nursing station | 5, Qamea | 6, Yacata | 7, Bouma",,,,,,[specimen_division(t)] = '1'
+spec_fac_bu,dropdown,Facility where specimen was collected (Bua),"1, Nabouwalu hospital | 2, Nabouwalu health centre | 3, Lekutu | 4, Wainunu | 5, Bua | 6, Yadua | 7, Navakasiga | 8, Kubulau",,,,,,[specimen_division(b)] = '1'
+spec_type,checkbox,Type of specimen,"blood, blood | joint, joint aspirate | tiss, tissue | wound, deep wound | emp, empyema | csf, CSF | oth, other",,,,,,
+tiss_site,text,Specify site of tissue,,,,,,,[spec_type(tiss)] = '1'
+spec_other,text,Specify other,,,,,,,[spec_type(oth)] = '1'
+date_stored,text,Date isolate stored,,,date_dmy,,,,
+isolate_type,checkbox,Type of isolate,"1, Group A Streptococcus | 2, Group C Streptococcus | 3, Group G Streptococcus | 9, Other",,,,,,
+no_stored,text,Total number of isolates stored (not including copies made),,,integer,,,,
+spec_comment,text,Comments: please detail different dates and collection of multiple samples,,"For subsequent specimens include date stored, health facility where samples was taken, type of isolate and label number",,,,,
+enrolage_grp,radio,"Calculated by enrolage_yrs, dividing cases into age groups","0, 0-4 | 1, 5-14 | 2, 15-24 | 3, 25-34 | 4, 35-44 | 5, 45-54 | 6, 55-64 | 7, >=65",,,,,,
+ethnicity_d,radio,Divides ethnicity into broader groups,"1, iTaukei | 2, Fijian of Indian decent | 3, Other",,,,,,
+ethnicity_d2,radio,Divides ethnicity into 2 broad groups- used for analysis (combines 2&3 of ethnicity_d),"1, iTaukei | 2, Other",,,,,,
+admit_month,radio,month in which each case was admitted,"1, January | 2, February etc",,,,,,
+subdivref,radio,manually looked at facility patient was referred from and grouped into subdivision,"1, Macuata | 2, Cakaudrove | 3, Bua | 4, Taveuni",,,,,,
+timept,radio,groups records taken at baseline (16.7.2018-30.6.2019-48) and post MDA (12.8.2019-31.7.2020),"1, Baseline | 2. Post MDA",,,,,,
