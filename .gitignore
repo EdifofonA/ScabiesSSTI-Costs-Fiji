@@ -55,6 +55,6 @@ temp/
 
 
 #Stata and csv files
-.dta
-.csv
+/data/*.dta
+/data/*.csv
 
