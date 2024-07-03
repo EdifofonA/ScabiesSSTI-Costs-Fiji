@@ -58,6 +58,6 @@ temp/
 /data/*.dta
 /data/*.csv
 
-# Woed files
-.docx
+# Word files
+*.docx
 
