@@ -51,8 +51,8 @@ rsconnect/
 .DS_Store
 
 #Other folders
-temp/
-
+resources/
+presentations/
 
 #Stata and csv files
 /data/*.dta
