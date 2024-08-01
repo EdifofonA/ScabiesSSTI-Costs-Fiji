@@ -477,7 +477,45 @@ ggplot(owsa, aes(x=parameter,y=value, fill=type, colour=type)) +
             aes(label = round(value, 2)),
             hjust= ifelse(subset(owsa, type == "High", select = value) < baseCase, 1.15, -0.15),
             size = 3.6)
-ggsave(height=4, width=8, dpi=600, file="output/Fig1.png")
-ggsave(height=4, width=8, dpi=600, file="output/Fig1.eps")
-ggsave(height=4, width=8, dpi=300, file="output/Fig1.tiff")
+#ggsave(height=4, width=8, dpi=600, file="output/Fig1.png")
+#ggsave(height=4, width=8, dpi=600, file="output/Fig1.eps")
+#ggsave(height=4, width=8, dpi=300, file="output/Fig1.tiff")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Two-way sensitivity analysis on cost of per outpatient visit #
+cVisitLow  <- sum((nTotalPhc["scabies"] * mean(phc$cMeanTotal_cClinicVisit_low[phc$dxScabies==1])),
+                 nTotalPhc["ssti"]    * mean(phc$cMeanTotal_cClinicVisit_low[phc$dxSsti==1]))
+cWardLow  <- nTotalHosp["related"] * mean(hosp$cMeanTotal_cWardAdmit_low[hosp$dxScabies==1])
+cTwsaLow <-  unname(cVisitLow+cWardLow)
+
+
+
+cVisitHigh <- sum((nTotalPhc["scabies"] * mean(phc$cMeanTotal_cClinicVisit_high[phc$dxScabies==1])),
+                  nTotalPhc["ssti"]    * mean(phc$cMeanTotal_cClinicVisit_high[phc$dxSsti==1]))
+cWardHigh <- nTotalHosp["related"] * mean(hosp$cMeanTotal_cWardAdmit_high[hosp$dxScabies==1])
+cTwsaHigh <- unname(cVisitHigh+cWardHigh)
+
 
