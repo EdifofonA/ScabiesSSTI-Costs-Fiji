@@ -3,7 +3,7 @@ source("code/0_parameters.R")
 #### Clean hospitalisations data ####
 
 # Read dataset and remove variable names from Stata file where needed
-hosp            <- read_dta("data/SSTI.dta")
+hosp            <- read_dta("data/hospital.dta")
 var_label(hosp) <- NULL
 
 # Change coding for those without scabies from 0 to 2 (for table 2)
@@ -16,7 +16,7 @@ hosp <- hosp %>%
   mutate(sex       = factor(sex, 
                             levels = c(1,2), 
                             labels = c("Male", "Female")),
-         ethnicity = factor(ethnicity_d2, 
+         ethnicity = factor(ethnicity, 
                             levels = c(1,2), 
                             labels = c("I-Taukei", "Others")),
          timept    = factor(timept, 

@@ -477,8 +477,8 @@ ggplot(owsa, aes(x=parameter,y=value, fill=type, colour=type)) +
             aes(label = round(value, 2)),
             hjust= ifelse(subset(owsa, type == "High", select = value) < baseCase, 1.15, -0.15),
             size = 3.6)
-#ggsave(height=4, width=8, dpi=600, file="output/Fig1.png")
-#ggsave(height=4, width=8, dpi=600, file="output/Fig1.eps")
+ggsave(height=4, width=8, dpi=1200, file="output/Fig2.png")
+ggsave(height=4, width=8, dpi=1200, file="output/Fig2.eps")
 #ggsave(height=4, width=8, dpi=300, file="output/Fig1.tiff")
 
 

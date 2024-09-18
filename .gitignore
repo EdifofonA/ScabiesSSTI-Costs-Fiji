@@ -57,6 +57,7 @@ presentations/
 #Stata and csv files
 /data/*.dta
 /data/*.csv
+/data/*.Rdata
 
 # Word files
 *.docx
