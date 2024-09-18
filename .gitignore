@@ -51,6 +51,7 @@ rsconnect/
 .DS_Store
 
 #Other folders
+output/
 resources/
 presentations/
 
