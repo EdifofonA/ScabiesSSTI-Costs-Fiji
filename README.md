@@ -12,7 +12,7 @@ The code in this repository was primarily written by Edifofon Akpan.
 Download the datasets at https://figshare.com/articles/dataset/Full_data_set_/######## and store them in the data folder
 
 Run the following scripts in order
-0_parameters.R
-1_costPHC.R
-2_costHosp.R
-3_results.R
+- 0_parameters.R
+- 1_costPHC.R
+- 2_costHosp.R
+- 3_results.R
