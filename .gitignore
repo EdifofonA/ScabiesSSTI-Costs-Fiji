@@ -48,7 +48,7 @@ po/*~
 rsconnect/
 
 # MacBook
-.DS_Store
+*.DS_Store
 
 #Other folders
 output/
