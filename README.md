@@ -1,6 +1,5 @@
 # Costs of primary healthcare presentations and hospital admissions for scabies and related skin infections in Fiji, 2018-2019
- Code repository for costs of primary healthcare presentations and hospital admissions for scabies and scabies-related skin infections in Fiji 2018-2019
-This repository contains the technical documentation for the costs of primary healthcare presentations and hospital admissions for scabies and scabies-related skin infections in Fiji 2018-2019
+This repository contains the analysis code for replicating the results in costs of primary healthcare presentations and hospital admissions for scabies and scabies-related skin infections in Fiji 2018-2019
 
 Please cite this as: Akpan E, Thean LJ, Baskota R, et al. Costs of primary healthcare presentations and hospital admissions for scabies and related skin infections in Fiji, 2018-2019 - replication code. version 1.0, 2024. Available at [https://github.com/EdifofonA/ScabiesSSTI-Costs-Fiji](https://github.com/EdifofonA/ScabiesSSTI-Costs-Fiji). Accessed ## Month 20##.
 
